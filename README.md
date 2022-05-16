@@ -12,7 +12,7 @@ python3 atm.py
 
 This project implements a simple ATM controller that simulates the following flow:
 
-Insert Card => PIN number => Select Account => See Balance/Deposit/Withdraw
+Insert Card => PIN number => See Balance/Deposit/Withdraw
   
 To make things simple, cents are not used, only dollar bills.
 
