@@ -34,18 +34,22 @@ class Bank:
 			return False
 		else:
 			return account.cash
-	def deposit(self, card_num, pin):
+	def deposit(self, card_num, pin, cash):
 		err, account = self.check_pin(card_num, pin)
 		if err == False:
 			return False
 		else:
-			return account.cash
-	def withdraw(self, card_num, pin):
+			account.cash += cash
+			return True
+	def withdraw(self, card_num, pin, cash):
 		err, account = self.check_pin(card_num, pin)
 		if err == False:
 			return False
 		else:
-			return account.cash
+			if (cash > account.cash):
+				return False
+			account.cash -= cash
+			return True
 
 
 class Atm:
