@@ -8,6 +8,9 @@ git clone https://github.com/firstimedeveloper/atm
 cd atm
 # run the program
 python3 atm.py
+
+# to run the unittest
+python3 test_atm.py
 ```
 
 This project implements a simple ATM controller that simulates the following flow:
