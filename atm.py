@@ -159,6 +159,7 @@ for account in bank.accounts:
 account = Account(0, 1234)
 atm = Atm(bank)
 atm.insert_card(account.card_num, account.pin) """
-bank = Bank()
-atm = Atm(bank)
-atm.run()
+if __name__=='__main__':
+	bank = Bank()
+	atm = Atm(bank)
+	atm.run()
