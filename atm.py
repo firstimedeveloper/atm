@@ -29,7 +29,7 @@ class Bank:
 				if account.pin == pin:
 					return True, account
 		return False
-	def get_balance(self, card_num, pin):
+	def balance(self, card_num, pin):
 		err, account = self.check_pin(card_num, pin)
 		if err == False:
 			return False, 0
@@ -70,17 +70,37 @@ class Atm:
 			print("Invalid Card")
 			self._authorized = False
 			return False
-	def see_balance(self):
+	def balance(self):
 		if self._authorized == False:
 			print("Not Authorized")
 			return False
 		else:
-			err, balance = self.bank.get_balance(self._card_num, self._pin)
+			err, balance = self.bank.balance(self._card_num, self._pin)
 			if err == False:
 				print("Something went wrong...")
 				return False
 			else:
 				print("Balance: $" + str(balance))
+			return True
+	def deposit(self, cash):
+		if self._authorized == False:
+			print("Not Authorized")
+			return False
+		else:
+			err = self.bank.deposit(self._card_num, self._pin, cash)
+			if err == False:
+				print("Something went wrong...")
+				return False
+			return True
+	def withdraw(self, cash):
+		if self._authorized == False:
+			print("Not Authorized")
+			return False
+		else:
+			err = self.bank.withdraw(self._card_num, self._pin, cash)
+			if err == False:
+				print("Something went wrong...")
+				return False
 			return True
 	def end(self):
 		self._card_num = 0
@@ -93,12 +113,30 @@ class Atm:
 			pin, cash = map(int, input("Account " + str(i) + ": Enter the pin number, and starting cash amount (pin, cash): ").split())
 			account = self.bank.add_account(pin, cash)
 			print(account)
-		while (True):
-			print("Starting the ATM simulation.")
-			card_num = int(input("Please insert your card: "))
-			pin = int(input("Please insert the pin number: "))
-			err = self.insert_card(card_num, pin)
-			break
+		print("Starting the ATM simulation.")
+		card_num = int(input("Please insert your card: "))
+		pin = int(input("Please insert the pin number: "))
+		err = self.insert_card(card_num, pin)
+		if err == False:
+			print("Something went wrong, try again later.")
+			return
+
+		action = 1
+		while action != 0:
+			action = int(input("Enter a number (0: Quit, 1:Balance, 2:Deposit, 3:Withdraw): "))
+			if action == 0:
+				print("Quiting")
+				break
+			elif action == 1:
+				self.balance()
+			elif action == 2:
+				val = int(input("Deoposit Amount: "))
+				self.deposit(val)
+				self.balance()
+			elif action == 3:
+				val = int(input("Deoposit Amount: "))
+				self.withdraw(val)
+				self.balance()
 
 
 
