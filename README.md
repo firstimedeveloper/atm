@@ -1,6 +1,15 @@
 # atm
 atm controller
 
+To run the program:
+```
+# clone the repo
+git clone https://github.com/firstimedeveloper/atm
+cd atm
+# run the program
+python3 atm.py
+```
+
 This project implements a simple ATM controller that simulates the following flow:
 
 Insert Card => PIN number => Select Account => See Balance/Deposit/Withdraw
